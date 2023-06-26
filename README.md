@@ -2,6 +2,7 @@
 A flask based Deployment for Machine learning algos.
 This app is aimed to produce risk assesment predictions for patients that underwent liver resection.
 ![image](https://github.com/AlaouiMdaghriAhmed/PredictInterface/assets/77700915/c8665a0d-0bdd-48ac-baaa-a24441e79c19)
+![image](https://github.com/AlaouiMdaghriAhmed/PredictInterface/assets/77700915/67c3e6f3-ccea-4cc4-9c26-aac107f1286c)
 
 ## How To Run
 1. Install `virtualenv`:
