@@ -1,6 +1,7 @@
 # PredictInterface
 A flask based Deployment for Machine learning algos.
 This app is aimed to produce risk assesment predictions for patients that underwent liver resection.
+![image](https://github.com/AlaouiMdaghriAhmed/PredictInterface/assets/77700915/c8665a0d-0bdd-48ac-baaa-a24441e79c19)
 
 ## How To Run
 1. Install `virtualenv`:
