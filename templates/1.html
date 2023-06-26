@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+            background-color: #5cabff;
+            color: #fff;
+            padding: 10px;
+            margin-top: 0;
+            border-radius: 10px;
+}
+.form-row {
+  flex-basis: 30%;
+  padding: 10px;
+  box-sizing: border-box;
+
+}
+
+.form-container {
+            display: flex;
+            flex-wrap: wrap;
+}
+.left{
+  left: 0;
+
+}
+.right{
+  right: 0;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #5cabff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #686eea;
+}
+.prediction-section {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+</style>
+    <title>Model Showcase</title>
+</head>
+<body>
+    <h2>Real-Time Complications Risk Calculator Before, During and After Hepatectomy</h2>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" >Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"> Pre-OP<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pre & Intra-OP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pre , Intra & Post-op</a>
+            </li>
+       
+            
+            
+          </ul>
+         
+        </div>
+      </nav>
+      <form action="/predict" method="POST">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="well">
+          <div class="form-item">
+            <label for="duree_hospitalisation">Durée d'hospitalisation:</label>
+            <input type="number" id="duree_hospitalisation" name="duree_hospitalisation">
+        </div>
+  
+        <div class="form-group shiny-input-container">
+            <label for="b_chirurgicaux">Antécedant Chirurgicaux:</label>
+            <select class="form-control" id="b_chirurgicaux" name="b_chirurgicaux">
+              <option value="0" selected>Pas d'Antécedant Chirurgicaux</option>
+              <option value="1">chirurgie pour cancer colorectale </option>
+              <option value="3">cholécystectomie </option>
+              <option value="1+2">chirurgie pour cancer colorectale & chirurgie pour tumeur primitifs Hépatique </option>
+              <option value="1+3">chirurgie pour cancer colorectale & cholécystectomie </option>
+              <option value="1+4">chirurgie pour cancer colorectale & Métastasectomie hépatique </option>
+            </select>  
+            
+        </div>
+  
+        <div class="form-group">
+            <label for="oms">OMS:</label>
+            <input type="number" id="oms" name="oms">
+        </div>
+  
+        <div class="form-item">
+            <label for="leucocytes">Leucocytes:</label>
+            <input type="number" id="leucocytes" name="leucocytes">
+        </div>
+  
+        <div class="form-item">
+            <label for="leucocytes_normal">Leucocytes Normal:</label>
+  
+            <select class="form-control" id="leucocytes_normal" name="leucocytes_normal">
+              <option value="normal" selected>Normal</option>
+              <option value="pathologique">Pathologique</option>
+            </select>
+        </div>
+              </div></div>
+              <div class="col-sm-3">
+                <div class="well">
+        <div class="form-item">
+            <label for="pal_normal">PAL Normal:</label>
+            <select class="form-control" id="pal_normal" name="pal_normal">
+              <option value="normal" selected>Normal</option>
+              <option value="pathologique">Pathologique</option>
+            </select>
+        </div>
+  
+        <div class="form-item">
+            <label for="glycemie_normal">Glycémie Normal:</label>
+            <select class="form-control" id="glycemie_normal" name="glycemie_normal">
+              <option value="normal" selected>Normal</option>
+              <option value="pathologique">Pathologique</option>
+            </select>
+        </div>
+  
+        <div class="form-item">
+            <label for="tdm">TDM:</label>
+            <select class="form-control" id="tdm" name="tdm">
+              <option value="oui" selected>Oui</option>
+              <option value="non">Non</option>
+            </select>
+        </div>
+  
+        <div class="form-item">
+            <label for="taille_lesion_rx_mm">Taille de la lésion RX (mm):</label>
+            <input type="number" id="taille_lesion_rx_mm" name="taille_lesion_rx_mm">
+        </div>
+  
+        <div class="form-item">
+            <label for="siouin_nb_seances">Nombre de Séances Chimiothérapie:</label>
+            <input type="number" id="siouin_nb_seances" name="siouin_nb_seances">
+        </div>
+    </div>
+              </div></div>
+        </div>
+    <div class="form-item">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+  
+          
+      </form>
+
+    <div class="prediction-section">
+      <h2>OUTPUT</h2>
+      <p>{{prediction }} .</p>
+      <p>{{prediction_proba }} .</p>
+      {%if image_path != null%}
+      <img src="{{ image_path }}" alt="Prediction Probabilities">
+      {%endif%}
+  </div>
+
+</body>
+</html>
+

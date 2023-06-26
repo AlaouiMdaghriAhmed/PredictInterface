@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+            background-color: #5cabff;
+            color: #fff;
+            padding: 10px;
+            margin-top: 0;
+            border-radius: 10px;
+}
+.form-row {
+  flex-basis: 30%;
+  padding: 10px;
+  box-sizing: border-box;
+
+}
+
+.form-container {
+            display: flex;
+            flex-wrap: wrap;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #5cabff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #686eea;
+}
+.prediction-section {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+</style>
+    <title>Model Showcase</title>
+</head>
+<body>
+    <h2>Real-Time Complications Risk Calculator Before, During and After Hepatectomy</h2>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" >Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"> Pre-OP<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pre & Intra-OP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pre , Intra & Post-op</a>
+            </li>
+       
+            
+            
+          </ul>
+         
+        </div>
+      </nav>
+      <form action="/predict1" method="POST">
+        <div class="form-container">
+          <div class="form-row">
+            
+              <div class="well">
+            <div class="form-item">
+              <label for="sexe">SEXE:</label>
+              <select class="form-control" id="sexe" name="sexe">
+                <option value="0" selected>Femme</option>
+                <option value="1">Homme</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="cardiopathie">Cardiopathie:</label>
+
+              <select class="form-control" id="cardiopathie" name="cardiopathie">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="bilirubine_t_normal">Bilirubine T Normal:</label>
+              <select class="form-control" id="bilirubine_t_normal" name="bilirubine_t_normal">
+                <option value="normal" selected>Normal</option>
+                <option value="pathologique">Pathologique</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="irm">IRM:</label>
+              <select class="form-control" id="irm" name="irm">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="chimiotherapie">Chimiothérapie:</label>
+              <select class="form-control" id="chimiotherapie" name="chimiotherapie">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="clampage_on">Clampage:</label>
+              <select class="form-control" id="clampage_on" name="clampage_on">
+                <option value="clampage" selected>Clampage</option>
+                <option value="pas de clampage">Pas de Clampage</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="type_resections">Type de Résections:</label>
+              <input type="number" id="type_resections" name="type_resections">
+            </div>
+      
+            <div class="form-item">
+              <label for="resection_majeure">Résection Majeure:</label>
+              <select class="form-control" id="resection_majeure" name="resection_majeure">
+                <option value="majeure" selected>Majeure</option>
+                <option value="mineure">Mineure</option>
+              </select>
+            </div>
+          </div>
+            </div>
+          
+          
+            <div class="form-row">
+              <div class="well">
+            <div class="form-item">
+              <label for="cholecystectomie">Cholécystectomie:</label>
+              <select class="form-control" id="cholecystectomie" name="cholecystectomie">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="saignement_quantite">Saignement Quantité (mm):</label>
+              <input type="number" id="saignement_quantite" name="saignement_quantite">
+            </div>
+      
+            <div class="form-item">
+              <label for="ahospitalisation_en_reanimation">Hospitalisation en Réanimation:</label>
+              <select class="form-control" id="ahospitalisation_en_reanimation" name="ahospitalisation_en_reanimation">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="antalgiques">Antalgiques:</label>
+              <select class="form-control" id="antalgiques" name="antalgiques">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="hemoglobine_postop_norm">Hémoglobine Postop :</label>
+              <select class="form-control" id="hemoglobine_postop_norm" name="hemoglobine_postop_norm">
+                <option value="normal" selected>Normal</option>
+                <option value="pathologique">Pathologique</option>
+              </select>
+            </div>
+      
+            <div class="form-item">
+              <label for="protidemie_postop">Protidémie Postop:</label>
+              <input type="text" id="protidemie_postop" name="protidemie_postop">
+            </div>
+      
+            <div class="form-item">
+              <label for="drainage">Drainage Percutané:</label>
+              <select class="form-control" id="drainage" name="drainage">
+                <option value="non" selected>Non</option>
+                <option value="oui">Oui</option>
+              </select>
+            </div>
+          
+        </div>
+      </div>
+      </div>
+      </div>
+        <div class="form-item">
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+
+        </form>
+      
+
+    <div class="prediction-section">
+      <h2>OUTPUT</h2>
+      <p>{{prediction }} .</p>
+      <p>{{prediction_proba }} .</p>
+      {%if image_path != null%}
+      <img src="{{ image_path }}" alt="Prediction Probabilities">
+      {%endif%}
+  </div>
+
+</body>
+</html>
+
